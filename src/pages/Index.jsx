@@ -4,10 +4,25 @@ import { Calendar } from "@/components/ui/calendar";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
+import { ComboboxDemo } from "@/components/ui/combobox";
 
 const Index = () => {
   const [checkInDate, setCheckInDate] = useState(null);
   const [checkOutDate, setCheckOutDate] = useState(null);
+  const [departureLocation, setDepartureLocation] = useState("");
+  const [arrivalLocation, setArrivalLocation] = useState("");
+  const [passengers, setPassengers] = useState(1);
+
+  const handleSearch = () => {
+    // Implement search logic here
+    console.log({
+      departureLocation,
+      arrivalLocation,
+      checkInDate,
+      checkOutDate,
+      passengers,
+    });
+  };
 
   return (
     <div className="space-y-10">
@@ -17,11 +32,12 @@ const Index = () => {
           <div className="text-center text-white space-y-4">
             <h1 className="text-4xl font-bold">Discover Your Next Adventure</h1>
             <div className="flex space-x-2">
-              <Input placeholder="Destination" className="w-1/4" />
+              <ComboboxDemo placeholder="Departure" value={departureLocation} onChange={setDepartureLocation} />
+              <ComboboxDemo placeholder="Arrival" value={arrivalLocation} onChange={setArrivalLocation} />
               <Calendar selected={checkInDate} onSelect={setCheckInDate} className="w-1/4" />
               <Calendar selected={checkOutDate} onSelect={setCheckOutDate} className="w-1/4" />
-              <Input placeholder="Guests" className="w-1/4" />
-              <Button>Search</Button>
+              <Input type="number" placeholder="Passengers" value={passengers} onChange={(e) => setPassengers(e.target.value)} className="w-1/4" />
+              <Button onClick={handleSearch}>Search</Button>
             </div>
           </div>
         </div>
